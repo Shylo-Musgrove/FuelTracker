@@ -1,0 +1,54 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainscreen_background"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:src="@drawable/fuel_gauge"/>
+
+    <TextView
+        android:text="@string/app_title"
+        android:textSize="60dp"
+        android:textColor="@color/title_text"
+        android:gravity="center|top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:visibility="invisible"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:onClick="addEntryClick"
+        android:text="@string/btn_add_entry"
+        android:textSize="35dp"
+        android:background="@color/button_background"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:onClick="viewEntriesClick"
+        android:text="@string/btn_view_entries"
+        android:textSize="35dp"
+        android:background="@color/button_background"/>
+
+</LinearLayout>

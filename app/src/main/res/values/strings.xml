@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FinalProject</string>
+    <string name="app_title">Fuel Tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_add_entry">Add Entry</string>
+    <string name="btn_view_entries">View Entries</string>
+    <string name="title_activity_view_fuel_entries">ViewFuelEntriesActivity</string>
+    <string name="title_activity_fuel_entries">ViewFuelEntriesActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="url_string">http://10.0.2.2:8080</string>
+
+</resources>
