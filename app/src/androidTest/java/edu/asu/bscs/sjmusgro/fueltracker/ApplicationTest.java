@@ -1,4 +1,4 @@
-package edu.asu.bscs.sjmusgro.finalproject;
+package edu.asu.bscs.sjmusgro.fueltracker;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

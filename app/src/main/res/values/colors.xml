@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <color name="title_text">#9966cc</color>
-   <color name="mainscreen_background">#00365b</color>
-    <color name="button_background">#6cbd44</color>
+   <color name="purple">#9966cc</color>
+   <color name="blue">#00365b</color>
+   <color name="green">#6cbd44</color>
+   <color name="title_text">@color/purple</color>
+   <color name="mainscreen_background">@color/blue</color>
+   <color name="button_background">@color/green</color>
+   <color name="entries_background">@color/blue</color>
+   <color name="entries_text">@color/green</color>
+    <color name="entries_divider">@color/purple</color>
+    <color name="entry_background">@color/blue</color>
+    <color name="entry_text">@color/green</color>
+    <color name="entry_button_background">@color/purple</color>
+    <color name="entry_button_text">@color/green</color>
 
 
 </resources>

@@ -1,7 +1,28 @@
-package edu.asu.bscs.sjmusgro.finalproject;
+package edu.asu.bscs.sjmusgro.fueltracker;
+
+/**
+ * Copyright 2015 Shylo Musgrove,
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the :License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * <p/>
+ * Purpose:
+ *
+ * @author Shylo Musgrove  Sjmusgro@asu.edu
+ *         Computer Science Student, CIDSE, IAFSE, Arizona State University Tempe
+ * @version 4/30/2015
+ */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,10 +30,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * Created by Shylo on 1/31/2015.
- */
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FuelEntryActivity extends Activity {
+    FuelEntry fuelEntry;
     private FuelEntryDAO datasource;
     EditText date;
     EditText gallons;
@@ -50,20 +74,19 @@ public class FuelEntryActivity extends Activity {
 
     private void extractIntent() {
         Bundle b = getIntent().getExtras();
+        editState = true;
         if(b != null) {
-            String date =  b.getString("date");
-            double gallons =  b.getDouble("gallons");
-            double price =  b.getDouble("price");
-            double mileage =  b.getDouble("mileage");
-
-            this.date.setText(date);
-            this.gallons.setText(gallons + "");
-            this.price.setText(price + "");
-            this.mileage.setText(mileage+"");
+            NumberFormat formatter = new DecimalFormat("#0.00");
+            long id =  b.getLong("id");
+            fuelEntry = datasource.getFuelEntryById(id);
+            this.date.setText(fuelEntry.getDate());
+            this.gallons.setText(formatter.format(fuelEntry.getGallons()));
+            this.price.setText(formatter.format(fuelEntry.getPrice()));
+            this.mileage.setText(formatter.format(fuelEntry.getMileage()));
             editState = false;
-        } else {
-            editState = true;
-
+        }else{
+            Date now = new Date();
+            this.date.setText(new SimpleDateFormat("MM/dd/yyyy").format(now));
         }
         makeEditable(editState);
     }
@@ -82,12 +105,23 @@ public class FuelEntryActivity extends Activity {
         {
 
         } else {
-            datasource.createFuelEntry(date.getText().toString(), Double.valueOf(gallons.getText().toString()), Double.valueOf(price.getText().toString()), Double.valueOf(mileage.getText().toString()));
+            if(fuelEntry==null) {
+                fuelEntry = new FuelEntry(date.getText().toString(), Double.valueOf(gallons.getText().toString()), Double.valueOf(price.getText().toString()), Double.valueOf(mileage.getText().toString()));
+                datasource.createFuelEntry(fuelEntry);
+            } else {
+                fuelEntry.setDate(date.getText().toString());
+                fuelEntry.setGallons(Double.valueOf(gallons.getText().toString()));
+                fuelEntry.setPrice(Double.valueOf(price.getText().toString()));
+                fuelEntry.setMileage(Double.valueOf(mileage.getText().toString()));
+                datasource.updateFuelEntry(fuelEntry);
+            }
         }
     }
 
     public void deleteClick(View v) {
-        makeEditable(!editState);
+        if(fuelEntry!=null){
+            datasource.deleteFuelEntry(fuelEntry);
+        }
         onBackPressed();
     }
 
